@@ -6,13 +6,13 @@
 //
 
 import Foundation
+import AVFoundation
 
 protocol SongViewModelDelegate: AnyObject {
     func updatedState(_ state: SongState)
 }
 
-//TODO: Create Protocol
-class SongViewModel: NSObject {
+class SongViewModel: NSObject, SongViewModelProtocol {
     
     var song: Song
     var state: SongState = .initial {
@@ -20,7 +20,8 @@ class SongViewModel: NSObject {
             self.delegate?.updatedState(state)
         }
     }
-    var downloadTask: URLSessionDownloadTask? = nil
+    private var downloadTask: URLSessionDownloadTask? = nil
+    private var audioPlayer: AVAudioPlayer?
 
     weak var delegate: SongViewModelDelegate?
     
@@ -43,7 +44,6 @@ class SongViewModel: NSObject {
     }
     
     func startDownload() {
-        
         if let url = URL(string: song.audioURL) {
             state = .downloading(0.0)
             downloadTask = self.urlSession.downloadTask(with: url)
@@ -51,6 +51,32 @@ class SongViewModel: NSObject {
         } else {
             state = .failed(.invalidRequest)
         }
+    }
+    
+    func playAudio() {
+        guard let audioURL = song.fileURL else {
+            return
+        }
+        do {
+            try AVAudioSession.sharedInstance().setMode(.default)
+            try AVAudioSession.sharedInstance().setActive(true, options: .notifyOthersOnDeactivation)
+            
+            audioPlayer = try AVAudioPlayer(contentsOf: audioURL)
+            if let player = audioPlayer {
+                state = .playing
+                player.play()
+            }
+        } catch {
+            state = .failed(.downloadError("AVAudioSession error"))
+        }
+    }
+    
+    func pauseAudio() {
+        guard let audioPlayer = audioPlayer else {
+            return
+        }
+        state = .available
+        audioPlayer.pause()
     }
     
 }

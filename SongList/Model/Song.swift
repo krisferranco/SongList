@@ -14,6 +14,6 @@ struct Song: Codable {
     let audioURL: String
     
     //set as optional not to break the response mapping
-    //nil initially, and has value onced download is completed
+    //nil initially, and will have value when download is completed
     var fileURL: URL?
 }

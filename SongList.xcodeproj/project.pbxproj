@@ -15,6 +15,8 @@
 		E16290C428C1A41E00F443F0 /* SongListViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16290C328C1A41E00F443F0 /* SongListViewModelProtocol.swift */; };
 		E16290C628C1D55100F443F0 /* SongViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16290C528C1D55100F443F0 /* SongViewModel.swift */; };
 		E16290C828C20C5100F443F0 /* CircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16290C728C20C5100F443F0 /* CircularProgress.swift */; };
+		E16290CA28C2316800F443F0 /* SongState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16290C928C2316800F443F0 /* SongState.swift */; };
+		E16290CC28C23BF100F443F0 /* SongViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16290CB28C23BF100F443F0 /* SongViewModelProtocol.swift */; };
 		E1C0469C28C0C14C00A152BE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C0469B28C0C14C00A152BE /* AppDelegate.swift */; };
 		E1C0469E28C0C14C00A152BE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C0469D28C0C14C00A152BE /* SceneDelegate.swift */; };
 		E1C046A028C0C14C00A152BE /* SongListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C0469F28C0C14C00A152BE /* SongListViewController.swift */; };
@@ -35,6 +37,8 @@
 		E16290C328C1A41E00F443F0 /* SongListViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongListViewModelProtocol.swift; sourceTree = "<group>"; };
 		E16290C528C1D55100F443F0 /* SongViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongViewModel.swift; sourceTree = "<group>"; };
 		E16290C728C20C5100F443F0 /* CircularProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgress.swift; sourceTree = "<group>"; };
+		E16290C928C2316800F443F0 /* SongState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongState.swift; sourceTree = "<group>"; };
+		E16290CB28C23BF100F443F0 /* SongViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongViewModelProtocol.swift; sourceTree = "<group>"; };
 		E1C0469828C0C14C00A152BE /* SongList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SongList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1C0469B28C0C14C00A152BE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E1C0469D28C0C14C00A152BE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -81,6 +85,7 @@
 			children = (
 				E16290B928C19F7900F443F0 /* Song.swift */,
 				E16290BB28C19FC200F443F0 /* SongListResponse.swift */,
+				E16290C928C2316800F443F0 /* SongState.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -99,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				E16290C328C1A41E00F443F0 /* SongListViewModelProtocol.swift */,
+				E16290CB28C23BF100F443F0 /* SongViewModelProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -272,6 +278,7 @@
 				E16290BA28C19F7900F443F0 /* Song.swift in Sources */,
 				E16290C628C1D55100F443F0 /* SongViewModel.swift in Sources */,
 				E1C046A628C0C14C00A152BE /* SongList.xcdatamodeld in Sources */,
+				E16290CC28C23BF100F443F0 /* SongViewModelProtocol.swift in Sources */,
 				E1C046A028C0C14C00A152BE /* SongListViewController.swift in Sources */,
 				E16290BC28C19FC200F443F0 /* SongListResponse.swift in Sources */,
 				E1C046BB28C1909C00A152BE /* SongTableViewCell.swift in Sources */,
@@ -280,6 +287,7 @@
 				E1C0469E28C0C14C00A152BE /* SceneDelegate.swift in Sources */,
 				E16290C128C1A3D800F443F0 /* SongListViewModel.swift in Sources */,
 				E16290B728C19E0000F443F0 /* APISession.swift in Sources */,
+				E16290CA28C2316800F443F0 /* SongState.swift in Sources */,
 				E16290BE28C1A10300F443F0 /* APIError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -7,28 +7,6 @@
 
 import UIKit
 
-enum SongState {
-    ///download not initialized
-    case initial
-    ///ongoing download process
-    case downloading(Float)
-    ///completed download, available for playing
-    case available
-    ///currently playing
-    case playing
-    ///error encounter
-    case failed(APIError)
-    
-    var buttonImageName: String {
-        switch self {
-        case .initial: return "download-icon"
-        case .available: return "play-icon"
-        case .playing: return "pause-icon"
-        default: return ""
-        }
-    }
-}
-
 class SongTableViewCell: UITableViewCell {
     
     static let defaultHeight: CGFloat = 150
@@ -49,10 +27,19 @@ class SongTableViewCell: UITableViewCell {
     }
     
     @IBAction func didTapStateActionButton(_ sender: Any) {
-        //Download song, play, pause
-        //Depends on state
-        if case .initial = viewModel?.state {
-            viewModel?.startDownload()
+        guard let viewModel = viewModel else {
+            return
+        }
+        
+        switch viewModel.state {
+        case .initial:
+            viewModel.startDownload()
+        case .available:
+            viewModel.playAudio()
+        case .playing:
+            viewModel.pauseAudio()
+        default:
+            break
         }
     }
     
@@ -85,8 +72,8 @@ extension SongTableViewCell: SongViewModelDelegate {
                 self.progressView.setProgressWithAnimation(value: progress)
             }
             
-        case .failed(let aPIError):
-            break
+        case .failed(let apiError):
+            print(apiError.localizedDescription)
         }
     }
     
