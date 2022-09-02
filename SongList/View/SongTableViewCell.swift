@@ -8,7 +8,7 @@
 import UIKit
 
 class SongTableViewCell: UITableViewCell {
-    static let defaultHeight: CGFloat = 100
+    static let defaultHeight: CGFloat = 150
     static let reuseIdentifier: String = "SongTableViewCell"
 
     @IBOutlet weak var titleLabel: UILabel!
@@ -21,6 +21,12 @@ class SongTableViewCell: UITableViewCell {
     }
     
     @IBAction func didTapStateActionButton(_ sender: Any) {
+        //Download song, play, pause
+        //Depends on state
+    }
+    
+    func bind(_ song: Song) {
+        titleLabel.text = song.name
     }
     
 }

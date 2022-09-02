@@ -19,31 +19,36 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4lE-eW-BOw">
                         <rect key="frame" x="5" y="5" width="404" height="118"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Song" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jnK-Sk-Q7L">
-                                <rect key="frame" x="24" y="30" width="66" height="35"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="29"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EJA-Zi-MnS">
-                                <rect key="frame" x="344" y="53" width="40" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="40" id="GUa-zC-CNb"/>
-                                    <constraint firstAttribute="height" constant="40" id="YDQ-uw-g1t"/>
-                                </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="square.and.arrow.down" catalog="system"/>
-                                <connections>
-                                    <action selector="didTapStateActionButton:" destination="7TS-m5-f0g" eventType="touchUpInside" id="5jh-AG-ZR3"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Ryx-6i-kny">
+                                <rect key="frame" x="20" y="20" width="364" height="78"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Song" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jnK-Sk-Q7L">
+                                        <rect key="frame" x="0.0" y="21.5" width="314" height="35"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="29"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="755" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EJA-Zi-MnS">
+                                        <rect key="frame" x="324" y="19" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="GUa-zC-CNb"/>
+                                            <constraint firstAttribute="height" constant="40" id="YDQ-uw-g1t"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="square.and.arrow.down" catalog="system"/>
+                                        <connections>
+                                            <action selector="didTapStateActionButton:" destination="7TS-m5-f0g" eventType="touchUpInside" id="5jh-AG-ZR3"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemGrayColor"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="EJA-Zi-MnS" secondAttribute="trailing" constant="20" id="4Y2-U6-78s"/>
-                            <constraint firstItem="jnK-Sk-Q7L" firstAttribute="leading" secondItem="4lE-eW-BOw" secondAttribute="leading" constant="24" id="8Y5-3D-245"/>
-                            <constraint firstItem="jnK-Sk-Q7L" firstAttribute="top" secondItem="4lE-eW-BOw" secondAttribute="top" constant="30" id="dla-5D-6i1"/>
-                            <constraint firstAttribute="bottom" secondItem="EJA-Zi-MnS" secondAttribute="bottom" constant="25" id="r3S-35-5Ws"/>
+                            <constraint firstAttribute="bottom" secondItem="Ryx-6i-kny" secondAttribute="bottom" constant="20" id="3W0-nR-qrt"/>
+                            <constraint firstItem="Ryx-6i-kny" firstAttribute="leading" secondItem="4lE-eW-BOw" secondAttribute="leading" constant="20" id="JPz-9p-tLD"/>
+                            <constraint firstAttribute="trailing" secondItem="Ryx-6i-kny" secondAttribute="trailing" constant="20" id="VGQ-lf-e35"/>
+                            <constraint firstItem="Ryx-6i-kny" firstAttribute="top" secondItem="4lE-eW-BOw" secondAttribute="top" constant="20" id="XC1-z0-s4j"/>
                         </constraints>
                     </view>
                 </subviews>
