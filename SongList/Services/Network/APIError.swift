@@ -12,5 +12,6 @@ enum APIError: Error {
     case invalidRequest
     case invalidResponse
     case serverError(String?)
+    case downloadError(String?)
     
 }

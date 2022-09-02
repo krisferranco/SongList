@@ -16,7 +16,7 @@ class SongListViewModel: SongListViewModelProtocol {
     
     private let apiSession = APISession.shared
     
-    var songs: [Song] = []
+    var songViewModels: [SongViewModel] = []
     weak var delegate: SongListViewModelDelegate?
     
     
@@ -28,7 +28,7 @@ class SongListViewModel: SongListViewModelProtocol {
                 if let error = error {
                     self.delegate?.receivedError(error)
                 } else {
-                    self.songs = songs
+                    self.songViewModels = songs.map { SongViewModel(song: $0) }
                     self.delegate?.songsUpdated()
                 }
             }

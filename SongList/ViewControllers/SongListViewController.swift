@@ -30,20 +30,20 @@ class SongListViewController: UIViewController {
 extension SongListViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.songs.count
+        return viewModel.songViewModels.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard
-            indexPath.row < viewModel.songs.count,
+            indexPath.row < viewModel.songViewModels.count,
             let cell = tableView.dequeueReusableCell(withIdentifier: SongTableViewCell.reuseIdentifier, for: indexPath) as? SongTableViewCell
         else {
             return UITableViewCell()
         }
 
         ///Update Cell details
-        let song = viewModel.songs[indexPath.row]
-        cell.bind(song)
+        let songViewModel = viewModel.songViewModels[indexPath.row]
+        cell.bind(songViewModel)
         return cell
     }
 }

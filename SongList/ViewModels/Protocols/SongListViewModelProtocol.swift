@@ -9,6 +9,6 @@ import Foundation
 
 protocol SongListViewModelProtocol {
     
-    var songs: [Song] { get }
+    var songViewModels: [SongViewModel] { get }
     func fetchSongs()
 }

@@ -28,14 +28,34 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="755" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EJA-Zi-MnS">
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2SM-SV-1iu">
+                                        <rect key="frame" x="319" y="19" width="40" height="40"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5yU-Bb-buU" customClass="CircularProgress" customModule="SongList" customModuleProvider="target">
+                                                <rect key="frame" x="5" y="5" width="30" height="30"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="1xb-Kf-YIg"/>
+                                                    <constraint firstAttribute="width" constant="30" id="J7x-YG-cw1"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="5yU-Bb-buU" firstAttribute="leading" secondItem="2SM-SV-1iu" secondAttribute="leading" constant="5" id="EmT-1u-CQ0"/>
+                                            <constraint firstItem="5yU-Bb-buU" firstAttribute="top" secondItem="2SM-SV-1iu" secondAttribute="top" constant="5" id="G8b-Pz-4yu"/>
+                                            <constraint firstAttribute="trailing" secondItem="5yU-Bb-buU" secondAttribute="trailing" constant="5" id="Taw-nK-WGN"/>
+                                            <constraint firstAttribute="bottom" secondItem="5yU-Bb-buU" secondAttribute="bottom" constant="5" id="ZOS-ct-cbv"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="755" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EJA-Zi-MnS">
                                         <rect key="frame" x="324" y="19" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="GUa-zC-CNb"/>
                                             <constraint firstAttribute="height" constant="40" id="YDQ-uw-g1t"/>
                                         </constraints>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="square.and.arrow.down" catalog="system"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="download-icon"/>
                                         <connections>
                                             <action selector="didTapStateActionButton:" destination="7TS-m5-f0g" eventType="touchUpInside" id="5jh-AG-ZR3"/>
                                         </connections>
@@ -61,6 +81,8 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="backgroundContentView" destination="4lE-eW-BOw" id="NtR-Ad-apE"/>
+                <outlet property="progressContainerView" destination="2SM-SV-1iu" id="sKN-O4-XQG"/>
+                <outlet property="progressView" destination="5yU-Bb-buU" id="fko-Fg-1a3"/>
                 <outlet property="stateActionButton" destination="EJA-Zi-MnS" id="RZC-o4-xzm"/>
                 <outlet property="titleLabel" destination="jnK-Sk-Q7L" id="Kzg-9d-vWX"/>
             </connections>
@@ -68,7 +90,10 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="square.and.arrow.down" catalog="system" width="121" height="128"/>
+        <image name="download-icon" width="31" height="22"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemGrayColor">
             <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

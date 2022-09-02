@@ -12,6 +12,7 @@ private let songListUrl: String = "/Lenhador/a0cf9ef19cd816332435316a2369bc00/ra
 
 typealias SongCompletionHandler = ([Song], APIError?) -> Void
 
+//TODO: Make this more generic utility service to be reusable and scalable
 class APISession {
     
     static let shared = APISession()
@@ -22,14 +23,12 @@ class APISession {
         guard
             let songUrl = URL(string: "\(baseUrl)\(songListUrl)")
         else {
-            //Return invalid url erro to completion handler
             completionHandler([], .invalidRequest)
             return
         }
-         let dataTask = URLSession.shared.dataTask(with: songUrl) { data, response, error in
+        
+        let dataTask = URLSession.shared.dataTask(with: songUrl) { data, response, error in
             if let error = error {
-                print(error.localizedDescription)
-                //Return api error to completion handler
                 completionHandler([], .serverError(error.localizedDescription))
             }
             
@@ -38,7 +37,6 @@ class APISession {
                 let responseData = data,
                 let songListResponse = try? decoder.decode(SongListResponse.self, from: responseData)
             else {
-                //Return invalid response/malformed to completion handler
                 completionHandler([], .invalidResponse)
                 return
             }
