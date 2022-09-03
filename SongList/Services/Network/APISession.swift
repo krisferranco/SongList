@@ -7,6 +7,11 @@
 
 import Foundation
 
+/**
+ - Handles the API calls request depending on the `request` parameter details to make the request
+ - Maps the server response to the expected Codable model type passed on `type` parameter
+ - Depending on the response, the request method will pass the mapped response or error to the `completionHandler`
+*/
 class APISession: APISessionProtocol {
     
     func request<T: Codable>(_ request: APIRequest,

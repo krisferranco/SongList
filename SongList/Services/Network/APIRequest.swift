@@ -7,6 +7,14 @@
 
 import Foundation
 
+/**
+ API Request consist of all the data related to a request
+ This can be improved to handle different requirements for a request such as
+    - request method
+    - header
+    - parameter
+    - etc.
+ */
 enum APIRequest {
     
     case songList

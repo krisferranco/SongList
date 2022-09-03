@@ -17,6 +17,7 @@ class SongPlayer: AudioPlayerProtocol {
         self.fileName = fileName
     }
     
+    /// Play the audio file located in FileManager.default documents directory with a file name matching the provided `fileName`
     func play() {
         guard let documentsURL = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) else {
             return
@@ -35,8 +36,12 @@ class SongPlayer: AudioPlayerProtocol {
         }
     }
     
+    /// Pause the currently playing audioPlayer
     func pause() {
-        guard let audioPlayer = audioPlayer else {
+        guard
+            let audioPlayer = audioPlayer,
+            audioPlayer.isPlaying
+        else {
             return
         }
         audioPlayer.pause()

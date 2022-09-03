@@ -1,9 +1,8 @@
 //
 //  CircularProgress.swift
-//  CircularProgress-Tutorial
+//  SongList
 //
-//  Created by Aman Aggarwal on 5/18/18.
-//  Copyright © 2018 iostutorialjunction.com . All rights reserved.
+//  Created by Kristhoffer Ferranco on 9/2/22.
 //
 
 import UIKit

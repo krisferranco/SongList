@@ -7,9 +7,9 @@
 
 import Foundation
 
-///Handles the single instance of API and CoreData services
-///Responsible for generating downloadFile and audioPlayer services as needed
-///Expose service protocols only, to abstract the concrete implementation, also to be easily mock for testing
+/// Handles the single instance of API and CoreData services
+/// Responsible for generating downloadFile and audioPlayer services as needed
+/// Expose service protocols only, to abstract the concrete implementation, also to be easily mock for testing
 class DependencyManager: DependencyManagerProtocol {
     
     let apiSession: APISessionProtocol

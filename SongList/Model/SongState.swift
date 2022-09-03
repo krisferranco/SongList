@@ -7,18 +7,20 @@
 
 import Foundation
 
+/// State of the `Song` model
 enum SongState {
-    ///download not initialized
+    /// download not initialized
     case initial
-    ///ongoing download process
+    /// ongoing download process
     case downloading(Float)
-    ///completed download, available for playing
+    /// completed download, available for playing
     case available
-    ///currently playing
+    /// currently playing
     case playing
-    ///error encounter
+    /// error encounter
     case failed(APIError)
     
+    /// name of the image from resources that corresponds the `state`
     var buttonImageName: String {
         switch self {
         case .initial: return "download-icon"

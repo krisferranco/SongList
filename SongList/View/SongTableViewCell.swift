@@ -43,6 +43,7 @@ class SongTableViewCell: UITableViewCell {
         }
     }
     
+    /// Update cell components base on the `viewModel` details
     func bind(_ viewModel: SongViewModel) {
         self.viewModel = viewModel
         titleLabel.text = viewModel.songName
@@ -53,6 +54,7 @@ class SongTableViewCell: UITableViewCell {
     
 }
 
+//MARK: SongViewModelDelegate methods
 extension SongTableViewCell: SongViewModelDelegate {
     func updatedState(_ state: SongState) {
         switch state {

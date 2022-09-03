@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Custom Errors for API requests
 enum APIError: Error {
     case invalidRequest
     case invalidResponse

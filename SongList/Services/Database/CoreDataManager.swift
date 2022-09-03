@@ -29,7 +29,7 @@ class CoreDataManager: CoreDataManagerProtocol {
         return persistentContainer.viewContext
     }
     
-    ///Saving any changes to managedObjectContext
+    /// Saving any changes to managedObjectContext
     func save() {
         do {
             try persistentContainer.viewContext.save()
@@ -38,6 +38,9 @@ class CoreDataManager: CoreDataManagerProtocol {
         }
     }
     
+    /// Get by id the specific ManagedObject defined by `type` parameter
+    /// Make sure that the model has exact attribute name of `id`
+    /// Will return a managedObject that matches the id else return nil
     func getModelById<T: NSManagedObject>(_ id: String, type: T.Type) -> T? {
         let predicate = NSPredicate(format: "id == %@", id)
         let fetchRequest: NSFetchRequest<T> = NSFetchRequest(entityName: String(describing: T.self))
@@ -50,6 +53,7 @@ class CoreDataManager: CoreDataManagerProtocol {
         }
     }
     
+    /// Will fetch all saved ManagedObject with specific type defined by `type` parameter
     func getAll<T: NSManagedObject>(_ type: T.Type) -> [T] {
         let fetchRequest: NSFetchRequest<T> = NSFetchRequest(entityName: String(describing: T.self))
         

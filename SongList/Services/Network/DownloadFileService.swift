@@ -70,6 +70,7 @@ extension DownloadFileService: URLSessionDownloadDelegate {
         }
     }
 
+    ///Delegate method that receives the progress of the download request and notifies the delegate to display progress on the screen
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
         if downloadTask == self.downloadTask {
             let calculatedProgress = Float(totalBytesWritten) / Float(totalBytesExpectedToWrite)

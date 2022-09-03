@@ -48,7 +48,6 @@ extension SongListViewController: UITableViewDataSource {
             return UITableViewCell()
         }
 
-        ///Update Cell details
         let songViewModel = viewModel.songViewModels[indexPath.row]
         cell.bind(songViewModel)
         return cell
