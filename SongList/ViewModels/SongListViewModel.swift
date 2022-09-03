@@ -37,7 +37,7 @@ class SongListViewModel: SongListViewModelProtocol {
     
     private func refreshSongs() {
         self.songViewModels = []
-        let songModels = dependencyManager.coreDataManager.getAllSongs()
+        let songModels = dependencyManager.coreDataManager.getAll(SongModel.self)
         let songs = songModels.map { $0.song }
         
         songs.forEach { [weak self] song in
@@ -54,7 +54,7 @@ class SongListViewModel: SongListViewModelProtocol {
     private func saveSongs(_ songs: [Song]) {
         songs.forEach { [weak self] song in
             guard let self = self else { return }
-            self.dependencyManager.coreDataManager.writeSong(song)
+            SongModel.writeModel(song, coreDataManager: self.dependencyManager.coreDataManager)
         }
         
         refreshSongs()

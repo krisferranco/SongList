@@ -6,10 +6,12 @@
 //
 
 import Foundation
+import CoreData
 
 protocol CoreDataManagerProtocol {
+    var viewContext: NSManagedObjectContext { get }
+    
     func save()
-    func writeSong(_ song: Song)
-    func getSongById(_ id: String) -> SongModel?
-    func getAllSongs() -> [SongModel]
+    func getModelById<T: NSManagedObject>(_ id: String, type: T.Type) -> T?
+    func getAll<T: NSManagedObject>(_ type: T.Type) -> [T]
 }

@@ -32,4 +32,14 @@ extension SongModel {
             fileName = song.fileName
         }
     }
+    
+    static func writeModel(_ song: Song, coreDataManager: CoreDataManagerProtocol) {
+        if let savedSong = coreDataManager.getModelById(song.id, type: SongModel.self) {
+            savedSong.updateValues(song)
+        } else {
+            let songModel = SongModel(context: coreDataManager.viewContext)
+            songModel.updateValues(song)
+        }
+        coreDataManager.save()
+    }
 }

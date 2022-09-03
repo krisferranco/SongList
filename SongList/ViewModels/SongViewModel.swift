@@ -69,7 +69,7 @@ extension SongViewModel: DownloadFileServiceDelegate {
     
     func didFinishedDownload(_ fileName: String, savedURL: URL) {
         song.fileName = fileName
-        if let songModel = dependencyManager.coreDataManager.getSongById(song.id) {
+        if let songModel = dependencyManager.coreDataManager.getModelById(song.id, type: SongModel.self) {
             songModel.fileName = fileName
             dependencyManager.coreDataManager.save()
         }

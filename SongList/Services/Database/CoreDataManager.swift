@@ -25,6 +25,10 @@ class CoreDataManager: CoreDataManagerProtocol {
         }
     }
     
+    var viewContext: NSManagedObjectContext {
+        return persistentContainer.viewContext
+    }
+    
     ///Saving any changes to managedObjectContext
     func save() {
         do {
@@ -34,19 +38,9 @@ class CoreDataManager: CoreDataManagerProtocol {
         }
     }
     
-    func writeSong(_ song: Song) {
-        if let savedSong = getSongById(song.id) {
-            savedSong.updateValues(song)
-        } else {
-            let songModel = SongModel(context: persistentContainer.viewContext)
-            songModel.updateValues(song)
-        }
-        save()
-    }
-    
-    func getSongById(_ id: String) -> SongModel? {
+    func getModelById<T: NSManagedObject>(_ id: String, type: T.Type) -> T? {
         let predicate = NSPredicate(format: "id == %@", id)
-        let fetchRequest: NSFetchRequest<SongModel> = SongModel.fetchRequest()
+        let fetchRequest: NSFetchRequest<T> = NSFetchRequest(entityName: String(describing: T.self))
         fetchRequest.predicate = predicate
         
         do {
@@ -56,8 +50,8 @@ class CoreDataManager: CoreDataManagerProtocol {
         }
     }
     
-    func getAllSongs() -> [SongModel] {
-        let fetchRequest: NSFetchRequest<SongModel> = SongModel.fetchRequest()
+    func getAll<T: NSManagedObject>(_ type: T.Type) -> [T] {
+        let fetchRequest: NSFetchRequest<T> = NSFetchRequest(entityName: String(describing: T.self))
         
         do {
             return try persistentContainer.viewContext.fetch(fetchRequest)
