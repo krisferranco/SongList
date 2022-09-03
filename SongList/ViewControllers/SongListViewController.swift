@@ -16,7 +16,6 @@ class SongListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         /// Register custom cell
         tableView.register(UINib(nibName: String(describing: SongTableViewCell.self), bundle: nil), forCellReuseIdentifier: SongTableViewCell.reuseIdentifier)
         tableView.rowHeight = SongTableViewCell.defaultHeight
@@ -50,7 +49,9 @@ extension SongListViewController: UITableViewDataSource {
 
 extension SongListViewController: SongListViewModelDelegate {
     func songsUpdated() {
-        tableView.reloadData()
+        DispatchQueue.main.async { [weak self] in
+            self?.tableView.reloadData()
+        }
     }
     
     func receivedError(_ error: APIError) {

@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import AVFoundation
 
 protocol SongViewModelDelegate: AnyObject {
     func updatedState(_ state: SongState)
@@ -14,33 +13,30 @@ protocol SongViewModelDelegate: AnyObject {
 
 class SongViewModel: NSObject, SongViewModelProtocol {
     
-    var song: Song
-    var state: SongState = .initial {
+    private var song: Song
+    
+    var state: SongState {
         didSet {
             self.delegate?.updatedState(state)
         }
     }
-    private var downloadTask: URLSessionDownloadTask? = nil
-    private var audioPlayer: AVAudioPlayer?
-
-    weak var delegate: SongViewModelDelegate?
-    
-    private lazy var urlSession = URLSession(configuration: .default,
-                                             delegate: self,
-                                             delegateQueue: nil)
     
     var songName: String {
         return song.name
     }
     
+    weak var delegate: SongViewModelDelegate?
+    
+    private var songPlayer: SongPlayer? = nil
+    private var downloadTask: URLSessionDownloadTask? = nil
+    private lazy var urlSession = URLSession(configuration: .default,
+                                             delegate: self,
+                                             delegateQueue: nil)
+    
     init(song: Song) {
         self.song = song
-        
+        state = song.fileURL != nil ? .available : .initial
         super.init()
-        
-        if let url = URL(string: song.audioURL) {
-            downloadTask = self.urlSession.downloadTask(with: url)
-        }
     }
     
     func startDownload() {
@@ -54,31 +50,26 @@ class SongViewModel: NSObject, SongViewModelProtocol {
     }
     
     func playAudio() {
-        guard let audioURL = song.fileURL else {
-            return
-        }
-        do {
-            try AVAudioSession.sharedInstance().setMode(.default)
-            try AVAudioSession.sharedInstance().setActive(true, options: .notifyOthersOnDeactivation)
-            
-            audioPlayer = try AVAudioPlayer(contentsOf: audioURL)
-            if let player = audioPlayer {
-                state = .playing
-                player.play()
-            }
-        } catch {
-            state = .failed(.downloadError("AVAudioSession error"))
-        }
+        songPlayer?.play()
     }
-    
+
     func pauseAudio() {
-        guard let audioPlayer = audioPlayer else {
-            return
-        }
-        state = .available
-        audioPlayer.pause()
+        songPlayer?.pause()
     }
     
+    private func saveFileURL(_ fileURL: URL) {
+        song.fileURL = fileURL.absoluteString
+        
+        //Only initialized when audio file is downloaded
+        songPlayer = SongPlayer(song)
+        songPlayer?.delegate = self
+    }
+}
+
+extension SongViewModel: SongPlayerDelegate {
+    func didChangeState(_ state: SongState) {
+        self.state = state
+    }
 }
 
 extension SongViewModel: URLSessionDownloadDelegate {
@@ -97,8 +88,7 @@ extension SongViewModel: URLSessionDownloadDelegate {
         do {
             let documentsURL = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
             let savedURL = documentsURL.appendingPathComponent(location.lastPathComponent)
-            //set fileURL or saved to CoreData
-            self.song.fileURL = savedURL
+            self.saveFileURL(savedURL)
             try FileManager.default.moveItem(at: location, to: savedURL)
             state = .available
         } catch {

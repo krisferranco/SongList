@@ -8,7 +8,6 @@
 import Foundation
 
 protocol SongViewModelProtocol {
-    var song: Song { get }
     var state: SongState { get }
     var songName: String { get }
     

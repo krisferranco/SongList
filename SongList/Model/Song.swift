@@ -7,7 +7,6 @@
 
 import Foundation
 
-//TODO: Create ManagedObject counterpart for Persistence
 struct Song: Codable {
     let id: String
     let name: String
@@ -15,5 +14,5 @@ struct Song: Codable {
     
     //set as optional not to break the response mapping
     //nil initially, and will have value when download is completed
-    var fileURL: URL?
+    var fileURL: String?
 }
