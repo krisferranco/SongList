@@ -11,9 +11,8 @@ class SongListViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    
-    //temporary injection
-    let viewModel = SongListViewModel()
+
+    var viewModel: SongListViewModelProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,10 +20,15 @@ class SongListViewController: UIViewController {
         tableView.register(UINib(nibName: String(describing: SongTableViewCell.self), bundle: nil), forCellReuseIdentifier: SongTableViewCell.reuseIdentifier)
         tableView.rowHeight = SongTableViewCell.defaultHeight
         
-        viewModel.delegate = self
+        viewModel?.delegate = self
         
+        /// API call
         activityIndicator.startAnimating()
-        viewModel.fetchSongs()
+        viewModel?.fetchSongs()
+    }
+    
+    func bind(_ viewModel: SongListViewModelProtocol) {
+        self.viewModel = viewModel
     }
 
 }
@@ -32,11 +36,12 @@ class SongListViewController: UIViewController {
 extension SongListViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.songViewModels.count
+        return viewModel?.songViewModels.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard
+            let viewModel = viewModel,
             indexPath.row < viewModel.songViewModels.count,
             let cell = tableView.dequeueReusableCell(withIdentifier: SongTableViewCell.reuseIdentifier, for: indexPath) as? SongTableViewCell
         else {

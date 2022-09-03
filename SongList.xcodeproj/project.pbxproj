@@ -30,6 +30,14 @@
 		E1D0ABB928C2BFD60038A97C /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D0ABB828C2BFD60038A97C /* CoreDataManager.swift */; };
 		E1D0ABC228C2C8FE0038A97C /* SongModel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D0ABC128C2C8FE0038A97C /* SongModel+Extension.swift */; };
 		E1D0ABC428C2FA8E0038A97C /* DownloadFileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D0ABC328C2FA8E0038A97C /* DownloadFileService.swift */; };
+		E1D0ABC628C395FC0038A97C /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D0ABC528C395FC0038A97C /* Coordinator.swift */; };
+		E1D0ABC928C3A1230038A97C /* APISessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D0ABC828C3A1230038A97C /* APISessionProtocol.swift */; };
+		E1D0ABCB28C3A1E10038A97C /* DependencyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D0ABCA28C3A1E10038A97C /* DependencyManager.swift */; };
+		E1D0ABCD28C3A2880038A97C /* CoreDataManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D0ABCC28C3A2880038A97C /* CoreDataManagerProtocol.swift */; };
+		E1D0ABD028C3ABA80038A97C /* DownloadFileServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D0ABCF28C3ABA80038A97C /* DownloadFileServiceProtocol.swift */; };
+		E1D0ABD328C3AC520038A97C /* AudioPlayerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D0ABD228C3AC520038A97C /* AudioPlayerProtocol.swift */; };
+		E1D0ABD528C3B3AB0038A97C /* DependencyManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D0ABD428C3B3AB0038A97C /* DependencyManagerProtocol.swift */; };
+		E1D0ABD728C3B5E40038A97C /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D0ABD628C3B5E40038A97C /* UIViewController+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +66,14 @@
 		E1D0ABB828C2BFD60038A97C /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		E1D0ABC128C2C8FE0038A97C /* SongModel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SongModel+Extension.swift"; sourceTree = "<group>"; };
 		E1D0ABC328C2FA8E0038A97C /* DownloadFileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadFileService.swift; sourceTree = "<group>"; };
+		E1D0ABC528C395FC0038A97C /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		E1D0ABC828C3A1230038A97C /* APISessionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APISessionProtocol.swift; sourceTree = "<group>"; };
+		E1D0ABCA28C3A1E10038A97C /* DependencyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyManager.swift; sourceTree = "<group>"; };
+		E1D0ABCC28C3A2880038A97C /* CoreDataManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManagerProtocol.swift; sourceTree = "<group>"; };
+		E1D0ABCF28C3ABA80038A97C /* DownloadFileServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadFileServiceProtocol.swift; sourceTree = "<group>"; };
+		E1D0ABD228C3AC520038A97C /* AudioPlayerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerProtocol.swift; sourceTree = "<group>"; };
+		E1D0ABD428C3B3AB0038A97C /* DependencyManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyManagerProtocol.swift; sourceTree = "<group>"; };
+		E1D0ABD628C3B5E40038A97C /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +100,7 @@
 		E16290B528C19CB000F443F0 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				E1D0ABC728C3A1130038A97C /* Protocols */,
 				E16290B628C19E0000F443F0 /* APISession.swift */,
 				E16290BD28C1A10300F443F0 /* APIError.swift */,
 				E1D0ABC328C2FA8E0038A97C /* DownloadFileService.swift */,
@@ -166,6 +183,10 @@
 			children = (
 				E1C0469B28C0C14C00A152BE /* AppDelegate.swift */,
 				E1C0469D28C0C14C00A152BE /* SceneDelegate.swift */,
+				E1D0ABC528C395FC0038A97C /* Coordinator.swift */,
+				E1D0ABCA28C3A1E10038A97C /* DependencyManager.swift */,
+				E1D0ABD428C3B3AB0038A97C /* DependencyManagerProtocol.swift */,
+				E1D0ABD628C3B5E40038A97C /* UIViewController+Extension.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -217,6 +238,7 @@
 		E1D0ABB628C2B5F30038A97C /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				E1D0ABD128C3AC410038A97C /* Protocols */,
 				E1D0ABB428C29E910038A97C /* SongPlayer.swift */,
 			);
 			path = Utilities;
@@ -225,6 +247,7 @@
 		E1D0ABB728C2BF940038A97C /* Database */ = {
 			isa = PBXGroup;
 			children = (
+				E1D0ABCE28C3A28C0038A97C /* Protocols */,
 				E1D0ABB828C2BFD60038A97C /* CoreDataManager.swift */,
 			);
 			path = Database;
@@ -236,6 +259,31 @@
 				E1D0ABC128C2C8FE0038A97C /* SongModel+Extension.swift */,
 			);
 			path = CoreData;
+			sourceTree = "<group>";
+		};
+		E1D0ABC728C3A1130038A97C /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				E1D0ABC828C3A1230038A97C /* APISessionProtocol.swift */,
+				E1D0ABCF28C3ABA80038A97C /* DownloadFileServiceProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		E1D0ABCE28C3A28C0038A97C /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				E1D0ABCC28C3A2880038A97C /* CoreDataManagerProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		E1D0ABD128C3AC410038A97C /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				E1D0ABD228C3AC520038A97C /* AudioPlayerProtocol.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -310,23 +358,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1D0ABD728C3B5E40038A97C /* UIViewController+Extension.swift in Sources */,
 				E16290C828C20C5100F443F0 /* CircularProgress.swift in Sources */,
 				E16290BA28C19F7900F443F0 /* Song.swift in Sources */,
 				E16290C628C1D55100F443F0 /* SongViewModel.swift in Sources */,
 				E1D0ABC428C2FA8E0038A97C /* DownloadFileService.swift in Sources */,
+				E1D0ABCD28C3A2880038A97C /* CoreDataManagerProtocol.swift in Sources */,
 				E1C046A628C0C14C00A152BE /* SongList.xcdatamodeld in Sources */,
 				E1D0ABB928C2BFD60038A97C /* CoreDataManager.swift in Sources */,
 				E16290CC28C23BF100F443F0 /* SongViewModelProtocol.swift in Sources */,
+				E1D0ABC628C395FC0038A97C /* Coordinator.swift in Sources */,
 				E1C046A028C0C14C00A152BE /* SongListViewController.swift in Sources */,
 				E16290BC28C19FC200F443F0 /* SongListResponse.swift in Sources */,
+				E1D0ABCB28C3A1E10038A97C /* DependencyManager.swift in Sources */,
 				E1C046BB28C1909C00A152BE /* SongTableViewCell.swift in Sources */,
 				E1C0469C28C0C14C00A152BE /* AppDelegate.swift in Sources */,
 				E16290C428C1A41E00F443F0 /* SongListViewModelProtocol.swift in Sources */,
 				E1C0469E28C0C14C00A152BE /* SceneDelegate.swift in Sources */,
+				E1D0ABC928C3A1230038A97C /* APISessionProtocol.swift in Sources */,
+				E1D0ABD328C3AC520038A97C /* AudioPlayerProtocol.swift in Sources */,
+				E1D0ABD528C3B3AB0038A97C /* DependencyManagerProtocol.swift in Sources */,
 				E16290C128C1A3D800F443F0 /* SongListViewModel.swift in Sources */,
 				E16290B728C19E0000F443F0 /* APISession.swift in Sources */,
 				E1D0ABC228C2C8FE0038A97C /* SongModel+Extension.swift in Sources */,
 				E16290CA28C2316800F443F0 /* SongState.swift in Sources */,
+				E1D0ABD028C3ABA80038A97C /* DownloadFileServiceProtocol.swift in Sources */,
 				E16290BE28C1A10300F443F0 /* APIError.swift in Sources */,
 				E1D0ABB528C29E910038A97C /* SongPlayer.swift in Sources */,
 			);

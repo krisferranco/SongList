@@ -8,12 +8,15 @@
 import Foundation
 import CoreData
 
-class CoreDataManager {
+/**
+ Manages the persistent store that is derived from Datamodel
+ Handles the saving, updating, and fetching managedObject model from persistent store
+ */
+class CoreDataManager: CoreDataManagerProtocol {
     
-    static let shared = CoreDataManager()
-    let persistentContainer: NSPersistentContainer
+    private let persistentContainer: NSPersistentContainer
     
-    private init() {
+    init() {
         persistentContainer = NSPersistentContainer(name: "SongList")
         persistentContainer.loadPersistentStores { description, error in
             if let error = error {
@@ -22,6 +25,7 @@ class CoreDataManager {
         }
     }
     
+    ///Saving any changes to managedObjectContext
     func save() {
         do {
             try persistentContainer.viewContext.save()

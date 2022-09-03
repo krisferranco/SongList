@@ -13,9 +13,14 @@ protocol DownloadFileServiceDelegate: AnyObject {
     func didReceiveError(_ error: APIError)
 }
 
-class DownloadFileService: NSObject {
+/**
+ - Service that downloads file from server using the file URL String provided from initialization.
+ - Saves the downloaded file to documents directory of FileManager.default
+ - after calling 'startDownload', this will notify delegate for the progress of download and when it completed the download or encounter an error.
+ */
+class DownloadFileService: NSObject, DownloadFileServiceProtocol {
     
-    let fileUrlString: String
+    private let fileUrlString: String
     private var downloadTask: URLSessionDownloadTask? = nil
     private lazy var urlSession = URLSession(configuration: .default,
                                              delegate: self,
@@ -42,7 +47,7 @@ extension DownloadFileService: URLSessionDownloadDelegate {
     
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
         
-        //Validate response status code
+        ///Validate response status code
         guard
             let httpResponse = downloadTask.response as? HTTPURLResponse,
             httpResponse.isSuccessStatusCode

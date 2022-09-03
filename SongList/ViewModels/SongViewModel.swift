@@ -13,6 +13,8 @@ protocol SongViewModelDelegate: AnyObject {
 
 class SongViewModel: NSObject, SongViewModelProtocol {
     
+    weak var delegate: SongViewModelDelegate?
+    private let dependencyManager: DependencyManagerProtocol
     private var song: Song
     
     var state: SongState {
@@ -25,25 +27,21 @@ class SongViewModel: NSObject, SongViewModelProtocol {
         return song.name
     }
     
-    weak var delegate: SongViewModelDelegate?
-    
-    private lazy var songPlayer: SongPlayer = {
+    private lazy var songPlayer: AudioPlayerProtocol = {
         ///Initialize only SongPlayer if audio file is already downloaded
-        let songPlayer = SongPlayer(song)
-        songPlayer.delegate = self
-        return songPlayer
+        return dependencyManager.generateAudioPlayerService(song.fileName ?? "")
     }()
     
-    private lazy var downloadService: DownloadFileService = {
+    private lazy var downloadService: DownloadFileServiceProtocol = {
+        ///Initialize service only as needed
         let downloadService = DownloadFileService(song.audioURL)
         downloadService.delegate = self
         return downloadService
     }()
     
-    private let coreDataManager = CoreDataManager.shared
-    
-    init(song: Song) {
+    init(song: Song, dependencyManager: DependencyManagerProtocol) {
         self.song = song
+        self.dependencyManager = dependencyManager
         state = song.fileName != nil ? .available : .initial
         super.init()
     }
@@ -54,19 +52,16 @@ class SongViewModel: NSObject, SongViewModelProtocol {
     
     func playAudio() {
         songPlayer.play()
+        state = .playing
     }
 
     func pauseAudio() {
         songPlayer.pause()
+        state = .available
     }
 }
 
-extension SongViewModel: SongPlayerDelegate {
-    func didChangeState(_ state: SongState) {
-        self.state = state
-    }
-}
-
+//MARK: DownloadFileServiceDelegate methods
 extension SongViewModel: DownloadFileServiceDelegate {
     func didReceiveProgress(_ progress: Float) {
         state = .downloading(progress)
@@ -74,9 +69,9 @@ extension SongViewModel: DownloadFileServiceDelegate {
     
     func didFinishedDownload(_ fileName: String, savedURL: URL) {
         song.fileName = fileName
-        if let songModel = coreDataManager.getSongById(song.id) {
+        if let songModel = dependencyManager.coreDataManager.getSongById(song.id) {
             songModel.fileName = fileName
-            coreDataManager.save()
+            dependencyManager.coreDataManager.save()
         }
         state = .available
     }

@@ -11,14 +11,8 @@ import Foundation
 private let baseUrl: String = "https://gist.githubusercontent.com"
 private let songListUrl: String = "/Lenhador/a0cf9ef19cd816332435316a2369bc00/raw/a1338834fc60f7513402a569af09ffa302a26b63/Songs.json"
 
-typealias SongCompletionHandler = ([Song], APIError?) -> Void
-
 //TODO: Make this more generic utility service to be reusable and scalable
-class APISession {
-    
-    static let shared = APISession()
-    
-    private init() { }
+class APISession: APISessionProtocol {
     
     func getSongs(completionHandler: @escaping SongCompletionHandler) {
         guard

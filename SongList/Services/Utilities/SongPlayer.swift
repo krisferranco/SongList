@@ -8,26 +8,17 @@
 import Foundation
 import AVFoundation
 
-protocol SongPlayerDelegate: AnyObject {
-    func didChangeState(_ state: SongState)
-}
-
-class SongPlayer {
+class SongPlayer: AudioPlayerProtocol {
     
-    var song: Song
+    private let fileName: String
     private var audioPlayer: AVAudioPlayer?
     
-    weak var delegate: SongPlayerDelegate?
-    
-    init(_ song: Song) {
-        self.song = song
+    init(_ fileName: String) {
+        self.fileName = fileName
     }
     
     func play() {
-        guard
-            let fileName = song.fileName,
-            let documentsURL = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-        else {
+        guard let documentsURL = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) else {
             return
         }
         do {
@@ -37,11 +28,10 @@ class SongPlayer {
             
             audioPlayer = try AVAudioPlayer(contentsOf: audioURL)
             if let player = audioPlayer {
-                self.delegate?.didChangeState(.playing)
                 player.play()
             }
         } catch {
-            self.delegate?.didChangeState(.failed(.downloadError("AVAudioSession error")))
+            print("Failed to play audio: \(error.localizedDescription) ")
         }
     }
     
@@ -49,7 +39,6 @@ class SongPlayer {
         guard let audioPlayer = audioPlayer else {
             return
         }
-        self.delegate?.didChangeState(.available)
         audioPlayer.pause()
     }
 }

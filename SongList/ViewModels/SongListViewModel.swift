@@ -14,18 +14,17 @@ protocol SongListViewModelDelegate: AnyObject {
 
 class SongListViewModel: SongListViewModelProtocol {
     
-    private let apiSession = APISession.shared
-    private let coreDataManager = CoreDataManager.shared
-    
-    var songViewModels: [SongViewModel] = []
     weak var delegate: SongListViewModelDelegate?
+    private let dependencyManager: DependencyManagerProtocol
+    var songViewModels: [SongViewModel] = []
     
-    init() {
+    init(dependencyManager: DependencyManagerProtocol) {
+        self.dependencyManager = dependencyManager
         refreshSongs()
     }
     
     func fetchSongs() {
-        apiSession.getSongs { [weak self] songs, error in
+        dependencyManager.apiSession.getSongs { [weak self] songs, error in
             guard let self = self else { return }
             
             if let error = error {
@@ -38,7 +37,7 @@ class SongListViewModel: SongListViewModelProtocol {
     
     private func refreshSongs() {
         self.songViewModels = []
-        let songModels = coreDataManager.getAllSongs()
+        let songModels = dependencyManager.coreDataManager.getAllSongs()
         let songs = songModels.map { $0.song }
         
         songs.forEach { [weak self] song in
@@ -48,14 +47,14 @@ class SongListViewModel: SongListViewModelProtocol {
             else {
                 return
             }
-            self.songViewModels.append(SongViewModel(song: song))
+            self.songViewModels.append(SongViewModel(song: song, dependencyManager: dependencyManager))
         }
     }
     
     private func saveSongs(_ songs: [Song]) {
         songs.forEach { [weak self] song in
             guard let self = self else { return }
-            self.coreDataManager.writeSong(song)
+            self.dependencyManager.coreDataManager.writeSong(song)
         }
         
         refreshSongs()
