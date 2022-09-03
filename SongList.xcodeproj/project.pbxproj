@@ -38,6 +38,7 @@
 		E1D0ABD328C3AC520038A97C /* AudioPlayerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D0ABD228C3AC520038A97C /* AudioPlayerProtocol.swift */; };
 		E1D0ABD528C3B3AB0038A97C /* DependencyManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D0ABD428C3B3AB0038A97C /* DependencyManagerProtocol.swift */; };
 		E1D0ABD728C3B5E40038A97C /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D0ABD628C3B5E40038A97C /* UIViewController+Extension.swift */; };
+		E1D0ABD928C3F7B60038A97C /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D0ABD828C3F7B50038A97C /* APIRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +75,7 @@
 		E1D0ABD228C3AC520038A97C /* AudioPlayerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerProtocol.swift; sourceTree = "<group>"; };
 		E1D0ABD428C3B3AB0038A97C /* DependencyManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyManagerProtocol.swift; sourceTree = "<group>"; };
 		E1D0ABD628C3B5E40038A97C /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		E1D0ABD828C3F7B50038A97C /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 				E16290B628C19E0000F443F0 /* APISession.swift */,
 				E16290BD28C1A10300F443F0 /* APIError.swift */,
 				E1D0ABC328C2FA8E0038A97C /* DownloadFileService.swift */,
+				E1D0ABD828C3F7B50038A97C /* APIRequest.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -380,6 +383,7 @@
 				E1D0ABD528C3B3AB0038A97C /* DependencyManagerProtocol.swift in Sources */,
 				E16290C128C1A3D800F443F0 /* SongListViewModel.swift in Sources */,
 				E16290B728C19E0000F443F0 /* APISession.swift in Sources */,
+				E1D0ABD928C3F7B60038A97C /* APIRequest.swift in Sources */,
 				E1D0ABC228C2C8FE0038A97C /* SongModel+Extension.swift in Sources */,
 				E16290CA28C2316800F443F0 /* SongState.swift in Sources */,
 				E1D0ABD028C3ABA80038A97C /* DownloadFileServiceProtocol.swift in Sources */,

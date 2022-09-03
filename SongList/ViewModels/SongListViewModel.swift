@@ -24,13 +24,16 @@ class SongListViewModel: SongListViewModelProtocol {
     }
     
     func fetchSongs() {
-        dependencyManager.apiSession.getSongs { [weak self] songs, error in
-            guard let self = self else { return }
+        dependencyManager.apiSession.request(.songList, type: SongListResponse.self) { [weak self] response, error in
+            guard
+                let self = self,
+                let songListResponse = response as? SongListResponse
+            else { return }
             
             if let error = error {
                 self.delegate?.receivedError(error)
             } else {
-                self.saveSongs(songs)
+                self.saveSongs(songListResponse.data)
             }
         }
     }

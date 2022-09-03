@@ -46,9 +46,11 @@ class SongViewModel: NSObject, SongViewModelProtocol {
         super.init()
     }
     
+    ///Will start download request base from the audio URL of Song model
     func startDownload() {
         downloadService.startDownload()
     }
+    
     
     func playAudio() {
         songPlayer.play()

@@ -7,8 +7,8 @@
 
 import Foundation
 
-typealias SongCompletionHandler = ([Song], APIError?) -> Void
+typealias APICompletionHandler = (Codable?, APIError?) -> Void
 
 protocol APISessionProtocol {
-    func getSongs(completionHandler: @escaping SongCompletionHandler)
+    func request<T: Codable>(_ request: APIRequest, type: T.Type, completionHandler: @escaping APICompletionHandler)
 }

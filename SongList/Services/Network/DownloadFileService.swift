@@ -32,6 +32,7 @@ class DownloadFileService: NSObject, DownloadFileServiceProtocol {
         super.init()
     }
     
+    ///Will start the download request base from the valid `fileUrlString` else will return an error if url is invalid
     func startDownload() {
         if let url = URL(string: fileUrlString) {
             delegate?.didReceiveProgress(0.0)
@@ -57,17 +58,18 @@ extension DownloadFileService: URLSessionDownloadDelegate {
         }
         
         do {
+            ///Saving downloaded file to documents directory before notifying the delegate for completed download
             let documentsURL = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
             let fileName = location.lastPathComponent
             let savedURL = documentsURL.appendingPathComponent(location.lastPathComponent)
             try FileManager.default.moveItem(at: location, to: savedURL)
+            
             delegate?.didFinishedDownload(fileName, savedURL: savedURL)
         } catch {
             delegate?.didReceiveError(.downloadError("File system error"))
         }
     }
 
-    
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
         if downloadTask == self.downloadTask {
             let calculatedProgress = Float(totalBytesWritten) / Float(totalBytesExpectedToWrite)
@@ -77,6 +79,7 @@ extension DownloadFileService: URLSessionDownloadDelegate {
 }
 
 
+///Convenience computed property extension for identifying valid http status code
 fileprivate extension HTTPURLResponse {
     var isSuccessStatusCode: Bool {
         return statusCode >= 200 && statusCode <= 299

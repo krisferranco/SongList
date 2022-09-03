@@ -7,36 +7,31 @@
 
 import Foundation
 
-//Can be move to Constants file
-private let baseUrl: String = "https://gist.githubusercontent.com"
-private let songListUrl: String = "/Lenhador/a0cf9ef19cd816332435316a2369bc00/raw/a1338834fc60f7513402a569af09ffa302a26b63/Songs.json"
-
-//TODO: Make this more generic utility service to be reusable and scalable
 class APISession: APISessionProtocol {
     
-    func getSongs(completionHandler: @escaping SongCompletionHandler) {
-        guard
-            let songUrl = URL(string: "\(baseUrl)\(songListUrl)")
-        else {
-            completionHandler([], .invalidRequest)
+    func request<T: Codable>(_ request: APIRequest,
+                             type: T.Type,
+                             completionHandler: @escaping APICompletionHandler) {
+        
+        guard let url = request.url else {
+            completionHandler(nil, .invalidRequest)
             return
         }
         
-        let dataTask = URLSession.shared.dataTask(with: songUrl) { data, response, error in
+        let dataTask = URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
-                completionHandler([], .serverError(error.localizedDescription))
+                completionHandler(nil, .serverError(error.localizedDescription))
             }
             
             let decoder = JSONDecoder()
             guard
                 let responseData = data,
-                let songListResponse = try? decoder.decode(SongListResponse.self, from: responseData)
+                let codableResponse = try? decoder.decode(T.self, from: responseData)
             else {
-                completionHandler([], .invalidResponse)
+                completionHandler(nil, .invalidResponse)
                 return
             }
-            
-            completionHandler(songListResponse.data, nil)
+            completionHandler(codableResponse, nil)
         }
         
         dataTask.resume()
