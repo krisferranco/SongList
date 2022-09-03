@@ -25,12 +25,13 @@ class SongPlayer {
     
     func play() {
         guard
-            let urlString = song.fileURL,
-            let audioURL = URL(string: urlString)
+            let fileName = song.fileName,
+            let documentsURL = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
         else {
             return
         }
         do {
+            let audioURL = documentsURL.appendingPathComponent(fileName)
             try AVAudioSession.sharedInstance().setMode(.default)
             try AVAudioSession.sharedInstance().setActive(true, options: .notifyOthersOnDeactivation)
             

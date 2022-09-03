@@ -27,42 +27,37 @@ class SongViewModel: NSObject, SongViewModelProtocol {
     
     weak var delegate: SongViewModelDelegate?
     
-    private var songPlayer: SongPlayer? = nil
-    private var downloadTask: URLSessionDownloadTask? = nil
-    private lazy var urlSession = URLSession(configuration: .default,
-                                             delegate: self,
-                                             delegateQueue: nil)
+    private lazy var songPlayer: SongPlayer = {
+        ///Initialize only SongPlayer if audio file is already downloaded
+        let songPlayer = SongPlayer(song)
+        songPlayer.delegate = self
+        return songPlayer
+    }()
+    
+    private lazy var downloadService: DownloadFileService = {
+        let downloadService = DownloadFileService(song.audioURL)
+        downloadService.delegate = self
+        return downloadService
+    }()
+    
+    private let coreDataManager = CoreDataManager.shared
     
     init(song: Song) {
         self.song = song
-        state = song.fileURL != nil ? .available : .initial
+        state = song.fileName != nil ? .available : .initial
         super.init()
     }
     
     func startDownload() {
-        if let url = URL(string: song.audioURL) {
-            state = .downloading(0.0)
-            downloadTask = self.urlSession.downloadTask(with: url)
-            downloadTask?.resume()
-        } else {
-            state = .failed(.invalidRequest)
-        }
+        downloadService.startDownload()
     }
     
     func playAudio() {
-        songPlayer?.play()
+        songPlayer.play()
     }
 
     func pauseAudio() {
-        songPlayer?.pause()
-    }
-    
-    private func saveFileURL(_ fileURL: URL) {
-        song.fileURL = fileURL.absoluteString
-        
-        //Only initialized when audio file is downloaded
-        songPlayer = SongPlayer(song)
-        songPlayer?.delegate = self
+        songPlayer.pause()
     }
 }
 
@@ -72,44 +67,22 @@ extension SongViewModel: SongPlayerDelegate {
     }
 }
 
-extension SongViewModel: URLSessionDownloadDelegate {
-    
-    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
-        
-        //Validate response status code
-        guard
-            let httpResponse = downloadTask.response as? HTTPURLResponse,
-            httpResponse.isSuccessStatusCode
-        else {
-            state = .failed(.serverError(nil))
-            return
-        }
-        
-        do {
-            let documentsURL = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-            let savedURL = documentsURL.appendingPathComponent(location.lastPathComponent)
-            self.saveFileURL(savedURL)
-            try FileManager.default.moveItem(at: location, to: savedURL)
-            state = .available
-        } catch {
-            state = .failed(.downloadError("File system error"))
-        }
+extension SongViewModel: DownloadFileServiceDelegate {
+    func didReceiveProgress(_ progress: Float) {
+        state = .downloading(progress)
     }
-
     
-    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
-        if downloadTask == self.downloadTask {
-            let calculatedProgress = Float(totalBytesWritten) / Float(totalBytesExpectedToWrite)
-            state = .downloading(calculatedProgress)
+    func didFinishedDownload(_ fileName: String, savedURL: URL) {
+        song.fileName = fileName
+        if let songModel = coreDataManager.getSongById(song.id) {
+            songModel.fileName = fileName
+            coreDataManager.save()
         }
+        state = .available
     }
-
     
-}
-
-//TODO: Move somewhere appropriate
-extension HTTPURLResponse {
-    var isSuccessStatusCode: Bool {
-        return statusCode >= 200 && statusCode <= 299
+    func didReceiveError(_ error: APIError) {
+        state = .failed(error)
     }
 }
+

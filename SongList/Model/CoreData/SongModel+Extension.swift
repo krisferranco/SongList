@@ -17,13 +17,19 @@ extension SongModel {
         else {
             return nil
         }
-        return Song(id: id, name: name, audioURL: audioURL, fileURL: fileURLString)
+        return Song(id: id, name: name, audioURL: audioURL, fileName: fileName)
     }
     
     func updateValues(_ song: Song) {
         id = song.id
         name = song.name
-        audioURLString = song.audioURL
-        fileURLString = song.fileURL
+        
+        ///Condition if the audioURL from api changes
+        ///Update value of saved fileURL if any
+        ///This is to prevent downloading the same file multiple times
+        if audioURLString != song.audioURL {
+            audioURLString = song.audioURL
+            fileName = song.fileName
+        }
     }
 }

@@ -63,15 +63,12 @@ extension SongTableViewCell: SongViewModelDelegate {
                 self.stateActionButton.isHidden = false
                 self.stateActionButton.setImage(UIImage(named: state.buttonImageName), for: .normal)
             }
-            
-            
         case .downloading(let progress):
             DispatchQueue.main.async {
                 self.progressContainerView.isHidden = false
                 self.stateActionButton.isHidden = true
                 self.progressView.setProgressWithAnimation(value: progress)
             }
-            
         case .failed(let apiError):
             print(apiError.localizedDescription)
         }

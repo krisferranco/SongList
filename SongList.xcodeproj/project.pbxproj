@@ -29,6 +29,7 @@
 		E1D0ABB528C29E910038A97C /* SongPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D0ABB428C29E910038A97C /* SongPlayer.swift */; };
 		E1D0ABB928C2BFD60038A97C /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D0ABB828C2BFD60038A97C /* CoreDataManager.swift */; };
 		E1D0ABC228C2C8FE0038A97C /* SongModel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D0ABC128C2C8FE0038A97C /* SongModel+Extension.swift */; };
+		E1D0ABC428C2FA8E0038A97C /* DownloadFileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D0ABC328C2FA8E0038A97C /* DownloadFileService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		E1D0ABB428C29E910038A97C /* SongPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongPlayer.swift; sourceTree = "<group>"; };
 		E1D0ABB828C2BFD60038A97C /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		E1D0ABC128C2C8FE0038A97C /* SongModel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SongModel+Extension.swift"; sourceTree = "<group>"; };
+		E1D0ABC328C2FA8E0038A97C /* DownloadFileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadFileService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +86,7 @@
 			children = (
 				E16290B628C19E0000F443F0 /* APISession.swift */,
 				E16290BD28C1A10300F443F0 /* APIError.swift */,
+				E1D0ABC328C2FA8E0038A97C /* DownloadFileService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -310,6 +313,7 @@
 				E16290C828C20C5100F443F0 /* CircularProgress.swift in Sources */,
 				E16290BA28C19F7900F443F0 /* Song.swift in Sources */,
 				E16290C628C1D55100F443F0 /* SongViewModel.swift in Sources */,
+				E1D0ABC428C2FA8E0038A97C /* DownloadFileService.swift in Sources */,
 				E1C046A628C0C14C00A152BE /* SongList.xcdatamodeld in Sources */,
 				E1D0ABB928C2BFD60038A97C /* CoreDataManager.swift in Sources */,
 				E16290CC28C23BF100F443F0 /* SongViewModelProtocol.swift in Sources */,

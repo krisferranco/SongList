@@ -10,6 +10,7 @@ import UIKit
 class SongListViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     //temporary injection
     let viewModel = SongListViewModel()
@@ -21,6 +22,8 @@ class SongListViewController: UIViewController {
         tableView.rowHeight = SongTableViewCell.defaultHeight
         
         viewModel.delegate = self
+        
+        activityIndicator.startAnimating()
         viewModel.fetchSongs()
     }
 
@@ -50,6 +53,7 @@ extension SongListViewController: UITableViewDataSource {
 extension SongListViewController: SongListViewModelDelegate {
     func songsUpdated() {
         DispatchQueue.main.async { [weak self] in
+            self?.activityIndicator.stopAnimating()
             self?.tableView.reloadData()
         }
     }
