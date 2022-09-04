@@ -14,8 +14,7 @@ The app data should be persistent. If the user has downloaded a few songs and ki
 
 ## Architecture Diagram
 
-![SongList Diagram drawio](https://user-images.githubusercontent.com/82820612/188321284-4242bca6-e43e-4acf-a711-d8ced6b52cff.svg)
-
+![SongList Diagram drawio](https://user-images.githubusercontent.com/82820612/188321431-ca8ef8aa-dfef-4f9c-9f95-4a7e57b73bfc.svg)
 
 ## Sample Screenshot
 
