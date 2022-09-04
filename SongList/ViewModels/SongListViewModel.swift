@@ -17,10 +17,14 @@ class SongListViewModel: SongListViewModelProtocol {
     weak var delegate: SongListViewModelDelegate?
     private let dependencyManager: DependencyManagerProtocol
     var songViewModels: [SongViewModel] = []
+    let refreshSongQueue = DispatchQueue.global(qos: .default)
     
     init(dependencyManager: DependencyManagerProtocol) {
         self.dependencyManager = dependencyManager
-        refreshSongs()
+        refreshSongQueue.sync { [weak self] in
+            self?.refreshSongs()
+        }
+        
     }
     
     func fetchSongs() {
@@ -60,7 +64,9 @@ class SongListViewModel: SongListViewModelProtocol {
             SongModel.writeModel(song, coreDataManager: self.dependencyManager.coreDataManager)
         }
         
-        refreshSongs()
-        delegate?.songsUpdated()
+        refreshSongQueue.sync { [weak self] in
+            self?.refreshSongs()
+            self?.delegate?.songsUpdated()
+        }
     }
 }

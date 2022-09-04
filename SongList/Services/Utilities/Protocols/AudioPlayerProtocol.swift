@@ -12,6 +12,10 @@ import Foundation
  The audio file should be located in FileManager.default documents directory with a file name matching the provided `fileName`
  */
 protocol AudioPlayerProtocol {
+    
+    /// Delegate that will be notified when playing the audio finished
+    var delegate: SongPlayerDelegate? { get set }
+    
     /// Play the audio file located in FileManager.default documents directory with a file name matching the provided `fileName`
     func play()
     

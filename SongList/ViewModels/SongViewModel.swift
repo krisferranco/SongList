@@ -16,6 +16,7 @@ class SongViewModel: NSObject, SongViewModelProtocol {
     weak var delegate: SongViewModelDelegate?
     private let dependencyManager: DependencyManagerProtocol
     private var song: Song
+    private let stateQueue = DispatchQueue.global(qos: .default)
     
     var state: SongState {
         didSet {
@@ -29,12 +30,14 @@ class SongViewModel: NSObject, SongViewModelProtocol {
     
     private lazy var songPlayer: AudioPlayerProtocol = {
         ///Initialize only SongPlayer if audio file is already downloaded
-        return dependencyManager.generateAudioPlayerService(song.fileName ?? "")
+        var songPlayer = dependencyManager.generateAudioPlayerService(song.fileName ?? "")
+        songPlayer.delegate = self
+        return songPlayer
     }()
     
     private lazy var downloadService: DownloadFileServiceProtocol = {
         ///Initialize service only as needed
-        let downloadService = DownloadFileService(song.audioURL)
+        var downloadService = dependencyManager.generateDownloadFileService(song.audioURL)
         downloadService.delegate = self
         return downloadService
     }()
@@ -54,19 +57,26 @@ class SongViewModel: NSObject, SongViewModelProtocol {
     
     func playAudio() {
         songPlayer.play()
-        state = .playing
+        updateState(.playing)
     }
 
     func pauseAudio() {
         songPlayer.pause()
-        state = .available
+        updateState(.available)
+    }
+    
+    private func updateState(_ newState: SongState) {
+        stateQueue.sync { [weak self] in
+            guard let self = self else { return }
+            self.state = newState
+        }
     }
 }
 
 //MARK: DownloadFileServiceDelegate methods
 extension SongViewModel: DownloadFileServiceDelegate {
     func didReceiveProgress(_ progress: Float) {
-        state = .downloading(progress)
+        updateState(.downloading(progress))
     }
     
     func didFinishedDownload(_ fileName: String, savedURL: URL) {
@@ -75,11 +85,18 @@ extension SongViewModel: DownloadFileServiceDelegate {
             songModel.fileName = fileName
             dependencyManager.coreDataManager.save()
         }
-        state = .available
+        updateState(.available)
     }
     
     func didReceiveError(_ error: APIError) {
-        state = .failed(error)
+        updateState(.failed(error))
+    }
+}
+
+//MARK: SongPlayerDelegate methods
+extension SongViewModel: SongPlayerDelegate {
+    func didFinishPlaying(_ player: AudioPlayerProtocol) {
+        updateState(.available)
     }
 }
 
