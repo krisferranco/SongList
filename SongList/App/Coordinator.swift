@@ -12,12 +12,12 @@ class Coordinator {
     
     let navigationController: UINavigationController
     var rootViewController: UIViewController?
-    let dependencyManager: DependencyManager
     
     init() {
         navigationController = UINavigationController()
         rootViewController = nil
-        dependencyManager = DependencyManager()
+        
+        DependencyContainer.shared.register(DependencyManagerProtocol.self, service: DependencyManager())
     }
     
     func start() {
@@ -25,7 +25,7 @@ class Coordinator {
         rootViewController = viewController
         navigationController.setViewControllers([viewController], animated: true)
         
-        let viewModel = SongListViewModel(dependencyManager: dependencyManager)
+        let viewModel = SongListViewModel()
         viewController.bind(viewModel)
     }
 }

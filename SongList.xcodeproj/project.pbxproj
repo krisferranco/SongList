@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E106B1DA28C5800D00014BD6 /* DependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E106B1D928C5800D00014BD6 /* DependencyContainer.swift */; };
 		E16290B728C19E0000F443F0 /* APISession.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16290B628C19E0000F443F0 /* APISession.swift */; };
 		E16290BA28C19F7900F443F0 /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16290B928C19F7900F443F0 /* Song.swift */; };
 		E16290BC28C19FC200F443F0 /* SongListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16290BB28C19FC200F443F0 /* SongListResponse.swift */; };
@@ -42,6 +43,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E106B1D928C5800D00014BD6 /* DependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyContainer.swift; sourceTree = "<group>"; };
 		E16290B628C19E0000F443F0 /* APISession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APISession.swift; sourceTree = "<group>"; };
 		E16290B928C19F7900F443F0 /* Song.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
 		E16290BB28C19FC200F443F0 /* SongListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongListResponse.swift; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 				E1D0ABCA28C3A1E10038A97C /* DependencyManager.swift */,
 				E1D0ABD428C3B3AB0038A97C /* DependencyManagerProtocol.swift */,
 				E1D0ABD628C3B5E40038A97C /* UIViewController+Extension.swift */,
+				E106B1D928C5800D00014BD6 /* DependencyContainer.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -361,6 +364,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E106B1DA28C5800D00014BD6 /* DependencyContainer.swift in Sources */,
 				E1D0ABD728C3B5E40038A97C /* UIViewController+Extension.swift in Sources */,
 				E16290C828C20C5100F443F0 /* CircularProgress.swift in Sources */,
 				E16290BA28C19F7900F443F0 /* Song.swift in Sources */,

@@ -14,17 +14,17 @@ protocol SongListViewModelDelegate: AnyObject {
 
 class SongListViewModel: SongListViewModelProtocol {
     
+    @Inject private var dependencyManager: DependencyManagerProtocol
+    
     weak var delegate: SongListViewModelDelegate?
-    private let dependencyManager: DependencyManagerProtocol
+    
     var songViewModels: [SongViewModel] = []
     let refreshSongQueue = DispatchQueue.global(qos: .default)
     
-    init(dependencyManager: DependencyManagerProtocol) {
-        self.dependencyManager = dependencyManager
+    init() {
         refreshSongQueue.sync { [weak self] in
             self?.refreshSongs()
         }
-        
     }
     
     func fetchSongs() {
@@ -54,7 +54,7 @@ class SongListViewModel: SongListViewModelProtocol {
             else {
                 return
             }
-            self.songViewModels.append(SongViewModel(song: song, dependencyManager: dependencyManager))
+            self.songViewModels.append(SongViewModel(song: song))
         }
     }
     

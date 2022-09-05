@@ -13,8 +13,9 @@ protocol SongViewModelDelegate: AnyObject {
 
 class SongViewModel: NSObject, SongViewModelProtocol {
     
+    @Inject private var dependencyManager: DependencyManagerProtocol
+    
     weak var delegate: SongViewModelDelegate?
-    private let dependencyManager: DependencyManagerProtocol
     private var song: Song
     private let stateQueue = DispatchQueue.global(qos: .default)
     
@@ -42,9 +43,8 @@ class SongViewModel: NSObject, SongViewModelProtocol {
         return downloadService
     }()
     
-    init(song: Song, dependencyManager: DependencyManagerProtocol) {
+    init(song: Song) {
         self.song = song
-        self.dependencyManager = dependencyManager
         state = song.fileName != nil ? .available : .initial
         super.init()
     }
