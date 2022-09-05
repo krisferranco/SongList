@@ -24,14 +24,14 @@ class DependencyContainer {
     }
 }
 
-@propertyWrapper public struct Inject<T: Any> {
-    public var component: T!
+@propertyWrapper struct Inject<T: Any> {
+    var component: T!
 
-    public init(name: String? = nil) {
+    init(name: String? = nil) {
         component = DependencyContainer.shared.resolve(T.self)
     }
 
-    public var wrappedValue: T {
+    var wrappedValue: T {
         get { return component }
         mutating set { component = newValue }
     }
